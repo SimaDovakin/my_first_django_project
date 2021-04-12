@@ -9,12 +9,14 @@
   <body>
     <h1>{{ title }}</h1>
     {% for item in news %}
-    <div class="item">
-      <h2>{{ item.title }}</h2>
-      <span>{{ item.created_at |date:"d-m-Y" }}</span>
-      <div class="text">{{ item.content }}</div>
-    </div>
-    <hr>
+      {% if item.is_published %}
+        <div class="item">
+          <h2>{{ item.title }}</h2>
+          <span>{{ item.created_at|date:"Y-m-d H:i" }}</span>
+          <div class="text">{{ item.content }}</div>
+        </div>
+        <hr>
+      {% endif %}
     {% endfor %}
 
   </body>
