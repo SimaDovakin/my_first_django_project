@@ -5,7 +5,8 @@ from .models import News
 
 
 def index(request):
-    return HttpResponse('<h1>Hello, world!</h1>')
+    context = {'title': 'Главная'}
+    return render(request, 'news/index.html', context=context)
 
 
 def news(request):
