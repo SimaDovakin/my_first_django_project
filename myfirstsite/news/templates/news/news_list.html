@@ -40,9 +40,16 @@
                   Категория: {{ item.category }}
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">{{ item.title }}</h5>
-                  <p class="card-text">{{ item.content }}</p>
-                  <a href="#" class="btn btn-primary">Подробнее...</a>
+                  <div class="media">
+                    {% if item.photo %}
+                      <img src="{{ item.photo.url }}" alt="img" width="350" class="mr-3">
+                    {% endif %}
+                    <div class="media-body">
+                      <h5 class="card-title">{{ item.title }}</h5>
+                      <p class="card-text">{{ item.content }}</p>
+                      <a href="#" class="btn btn-primary">Подробнее...</a>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-footer text-muted">
                   {{ item.created_at|date:"d.m.Y H:i" }}
