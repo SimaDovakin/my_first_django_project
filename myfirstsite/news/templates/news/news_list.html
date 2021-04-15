@@ -34,19 +34,21 @@
       <div class="row">
         <div class="col-md-12">
           {% for item in news %}
-          <div class="card mb-3">
-            <div class="card-header">
-              Категория: {{ item.category }}
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text">{{ item.content }}</p>
-              <a href="#" class="btn btn-primary">Подробнее...</a>
-            </div>
-            <div class="card-footer text-muted">
-              {{ item.created_at|date:"d.m.Y H:i" }}
-            </div>
-          </div>
+            {% if item.is_published %}
+              <div class="card mb-3">
+                <div class="card-header">
+                  Категория: {{ item.category }}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.title }}</h5>
+                  <p class="card-text">{{ item.content }}</p>
+                  <a href="#" class="btn btn-primary">Подробнее...</a>
+                </div>
+                <div class="card-footer text-muted">
+                  {{ item.created_at|date:"d.m.Y H:i" }}
+                </div>
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
