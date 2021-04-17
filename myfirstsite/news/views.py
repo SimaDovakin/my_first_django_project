@@ -13,8 +13,22 @@ def news(request):
     news_list = News.objects.order_by('-created_at')
     category_list = Category.objects.order_by('title')
     context = {
-        'title': 'News List',
+        'title': 'Список новостей',
         'news': news_list,
+        'categories': category_list
+    }
+
+    return render(request, 'news/news_list.html', context=context)
+
+
+def get_category_news(request, category_id):
+    news = News.objects.filter(category_id=category_id)
+    category_list = Category.objects.order_by('title')
+    category = Category.objects.get(pk=category_id)
+    context = {
+        'title': category.title,
+        'category_id': category_id,
+        'news': news,
         'categories': category_list
     }
 

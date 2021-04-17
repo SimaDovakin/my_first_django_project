@@ -4,5 +4,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', news)
+    path('', news, name='news_list'),
+    path('<int:category_id>/', get_category_news, name='category'),
 ]
