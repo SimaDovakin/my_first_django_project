@@ -5,17 +5,10 @@
 {% block heading %}{{ title }}{% endblock %}
 
 {% block sidebar %}
-  <div class="col-md-4">
-    <div class="list-group">
-      {% for category in categories %}
-        <a href="{% url 'category' category.pk %}" class="list-group-item list-group-item-action {% if category.pk == category_id %}active{% endif %}" aria-current="true">{{ category.title }}</a>
-      {% endfor %}
-    </div>
-  </div>
+  {% include 'include/_sidebar.html' %}
 {% endblock %}
 
 {% block content %}
-  <div class="col-md-8">
     {% for item in news %}
       {% if item.is_published %}
         <div class="card mb-3">
@@ -40,5 +33,4 @@
         </div>
       {% endif %}
     {% endfor %}
-  </div>
 {% endblock %}
