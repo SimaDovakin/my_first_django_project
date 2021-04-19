@@ -9,25 +9,24 @@
 {% endblock %}
 
 {% block content %}
-      {% if item.is_published %}
+      {% if news.is_published %}
         <div class="card mb-3">
           <div class="card-header">
-            Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
+            Категория: <a href="{{ news.category.get_absolute_url }}">{{ news.category }}</a>
           </div>
           <div class="card-body">
             <div class="media">
-              {% if item.photo %}
-                <img src="{{ item.photo.url }}" alt="img" width="350" class="mr-3">
+              {% if news.photo %}
+                <img src="{{ news.photo.url }}" alt="img" width="350" class="mr-3">
               {% endif %}
               <div class="media-body">
-                <h5 class="card-title">{{ item.title }}</h5>
-                <p class="card-text">{{ item.content|safe|linebreaksbr|truncatewords:50 }}</p>
-                <a href="#" class="btn btn-primary">Подробнее...</a>
+                <h5 class="card-title">{{ news.title }}</h5>
+                <p class="card-text">{{ news.content|safe|linebreaksbr }}</p>
               </div>
             </div>
           </div>
           <div class="card-footer text-muted">
-            {{ item.created_at|date:"d.m.Y H:i" }}
+            {{ news.created_at|date:"d.m.Y H:i" }}
           </div>
         </div>
       {% endif %}
