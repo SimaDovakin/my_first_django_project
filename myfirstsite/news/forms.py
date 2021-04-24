@@ -1,5 +1,8 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import News
+import re
+
 
 
 class NewsForm(forms.ModelForm):
@@ -13,3 +16,10 @@ class NewsForm(forms.ModelForm):
                 attrs={'class': 'form-control'},
             )
         }
+
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match(r'^\s*\d', title):
+            raise ValidationError("Заголовок не должен начинаться из цифры")
+        return title
