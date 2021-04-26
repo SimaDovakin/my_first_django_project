@@ -10,7 +10,6 @@
 
 {% block content %}
     {% for item in news %}
-      {% if item.is_published %}
         <div class="card mb-3">
           <div class="card-header">
             Категория:
@@ -36,6 +35,5 @@
             {{ item.created_at|date:"d.m.Y H:i" }}
           </div>
         </div>
-      {% endif %}
     {% endfor %}
 {% endblock %}
