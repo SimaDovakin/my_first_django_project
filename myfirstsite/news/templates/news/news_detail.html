@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-      {% if news.is_published %}
         <div class="card mb-3">
           <div class="card-header">
             Категория: <a href="{{ news.category.get_absolute_url }}">{{ news.category }}</a>
@@ -29,5 +28,4 @@
             {{ news.created_at|date:"d.m.Y H:i" }}
           </div>
         </div>
-      {% endif %}
 {% endblock %}
