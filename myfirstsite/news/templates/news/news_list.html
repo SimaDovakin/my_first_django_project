@@ -32,7 +32,8 @@
             </div>
           </div>
           <div class="card-footer text-muted">
-            {{ item.created_at|date:"d.m.Y H:i" }}
+            <span>{{ item.created_at|date:"d.m.Y H:i" }}</span>
+            <span style="float: right;">Количество просмотров: {{ item.views }}</span>
           </div>
         </div>
     {% endfor %}

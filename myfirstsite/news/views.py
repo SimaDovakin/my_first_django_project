@@ -43,6 +43,12 @@ class ViewNews(DetailView):
     model = News
     pk_url_kwarg = 'news_id'
 
+    def get_object(self):
+        obj = super().get_object()
+        obj.views += 1
+        obj.save()
+        return obj
+
 
 class CreateNews(CreateView):
     form_class = NewsForm
