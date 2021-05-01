@@ -46,8 +46,9 @@ class ViewNews(DetailView):
 
     def get_object(self):
         obj = super().get_object()
-        obj.views += 1
+        obj.views = F('views') + 1
         obj.save()
+        obj.refresh_from_db()    
         return obj
 
 
