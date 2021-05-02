@@ -1,0 +1,16 @@
+#header {
+  background: #15712c;
+}
+
+h1, #content-related .module h2,
+a.section:link, a.section:visited {
+  color: #f5dd5d;
+}
+
+.module caption {
+  background: #025116;
+}
+
+a:link, a:visited {
+  color: #59e37c;
+}

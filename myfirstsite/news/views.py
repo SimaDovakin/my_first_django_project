@@ -21,7 +21,7 @@ class NewsList(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True)
+        return News.objects.filter(is_published=True).select_related('category')
 
 
 class NewsByCategory(ListView):
@@ -30,7 +30,7 @@ class NewsByCategory(ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True, category_id=self.kwargs['category_id'])
+        return News.objects.filter(is_published=True, category_id=self.kwargs['category_id']).select_related('category')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,9 +46,8 @@ class ViewNews(DetailView):
 
     def get_object(self):
         obj = super().get_object()
-        obj.views = F('views') + 1
+        obj.views += 1
         obj.save()
-        obj.refresh_from_db()    
         return obj
 
 
