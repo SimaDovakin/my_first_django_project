@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import News, Category
 from .forms import NewsForm
@@ -51,6 +52,8 @@ class ViewNews(DetailView):
         return obj
 
 
-class CreateNews(CreateView):
+class CreateNews(LoginRequiredMixin, CreateView):
+    login_url = '/admin/'
+
     form_class = NewsForm
     template_name = 'news/add_news.html'
