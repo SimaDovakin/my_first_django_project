@@ -1,5 +1,9 @@
 #header {
-  background: #15712c;
+  background: #2f683d;
+}
+
+div.breadcrumbs {
+  background: #284a35;
 }
 
 h1, #content-related .module h2,
@@ -8,7 +12,7 @@ a.section:link, a.section:visited {
 }
 
 .module caption {
-  background: #025116;
+  background: #183921;
 }
 
 a:link, a:visited {
