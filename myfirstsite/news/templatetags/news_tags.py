@@ -1,5 +1,5 @@
 from django import template
-from django.db.models import Count
+from django.db.models import Count, F
 
 from news.models import Category
 
@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag()
 def get_categories():
-    cats = Category.objects.annotate(Count('news')).filter(news__count__gt=0)
+    cats = Category.objects.annotate(cnt=Count('news', filter=F('news__is_published'))).filter(cnt__gt=0)
     return cats
 
 
