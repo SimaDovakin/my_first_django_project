@@ -18,13 +18,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from news.views import index
+from news.views import index, register, login
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
-    path('', index, name='home')
+    path('', index, name='home'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login')
 ]
 
 if settings.DEBUG:

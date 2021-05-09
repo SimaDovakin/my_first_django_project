@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import News, Category
 from .forms import NewsForm
@@ -19,6 +20,15 @@ def test(request):
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
     return render(request, 'news/test.html', {'page_obj': page_obj})
+
+
+def register(request):
+    form = UserCreationForm()
+    return render(request, 'news/register.html', {'form': form})
+
+
+def login(request):
+    return render(request, 'news/login.html')
 
 
 class NewsList(ListView):
