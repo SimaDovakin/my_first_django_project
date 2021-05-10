@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 from .models import News, Category
-from .forms import NewsForm
+from .forms import NewsForm, UserRegisterForm
 
 
 def index(request):
@@ -25,7 +25,7 @@ def test(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Вы успешно зарегистрированы!")
@@ -33,7 +33,7 @@ def register(request):
         else:
             messages.error(request, "Ошибка регистрации!")
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'news/register.html', {'form': form})
 
 
