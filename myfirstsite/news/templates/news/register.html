@@ -4,12 +4,13 @@
   Регистрация
 {% endblock %}
 
+{% block heading %}Регистрация{% endblock %}
+
 {% block sidebar %}
   {{ block.super }}
 {% endblock %}
 
 {% block content %}
-  <h1>Регистрация</h1>
   <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
