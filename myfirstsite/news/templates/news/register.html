@@ -11,12 +11,16 @@
 {% endblock %}
 
 {% block content %}
+  {{ form.errors }}
   <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary btn-block">
-      Регистрация
-    </button>
+    {% for field in form %}
+      <div>
+        {{ field.label }}
+        {{ field }}
+      </div>
+    {% endfor %}
+    <button type="submit" name="button" class="btn btn-primary btn-block mt-4">Отправить</button>
   </form>
 {% endblock %}
 {% block pagination %}{% endblock %}

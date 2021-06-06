@@ -13,6 +13,17 @@
 {% endblock %}
 
 {% block content %}
+  {{ form.error }}
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div>
+        {{ field.label }}
+        {{ field }}
+      </div>
+    {% endfor %}
+    <button type="submit" name="button" class="btn btn-primary btn-block mt-4">Вход</button>
+  </form>
 {% endblock %}
 
 {% block pagination %}{% endblock %}

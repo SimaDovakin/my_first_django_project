@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate, logout, login as my_login
 from django.core.paginator import Paginator
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 from .models import News, Category
-from .forms import NewsForm, UserRegisterForm
+from .forms import NewsForm, RegisterForm, LoginForm
 
 
 def index(request):
@@ -25,20 +25,36 @@ def test(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Вы успешно зарегистрированы!")
+            messages.success(request, "Вы успешно зарегистрировались.")
             return redirect('login')
         else:
-            messages.error(request, "Ошибка регистрации!")
+            messages.error(request, "Что-то пошло не так.")
     else:
-        form = UserRegisterForm()
+        form = RegisterForm()
     return render(request, 'news/register.html', {'form': form})
 
 
 def login(request):
-    return render(request, 'news/login.html')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            my_login(request, user)
+            messages.success(request, "Вы успешно авторизованы.")
+            return redirect('home')
+        else:
+            messages.error(request, "Неправильное имя пользователя или пароль.")
+
+    else:
+        form = LoginForm()
+    return render(request, 'news/login.html', {'form': form})
 
 
 class NewsList(ListView):
