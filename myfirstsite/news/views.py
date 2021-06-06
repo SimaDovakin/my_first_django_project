@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, logout, login as my_login
+from django.contrib.auth import authenticate, logout, login
 from django.core.paginator import Paginator
 from django.contrib import messages
 
@@ -37,7 +37,7 @@ def register(request):
     return render(request, 'news/register.html', {'form': form})
 
 
-def login(request):
+def my_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
 
@@ -46,7 +46,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            my_login(request, user)
+            login(request, user)
             messages.success(request, "Вы успешно авторизованы.")
             return redirect('home')
         else:
@@ -55,6 +55,11 @@ def login(request):
     else:
         form = LoginForm()
     return render(request, 'news/login.html', {'form': form})
+
+
+def my_logout(request):
+    logout(request)
+    return render(request, 'news/logout.html')
 
 
 class NewsList(ListView):

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Выход из аккаунта
+{% endblock %}
+
+{% block heading %}
+  Выход из аккаунта
+{% endblock %}
+
+{% block sidebar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <h3>Вы успешно вышли из своего аккаунта</h3>
+  <span>
+    <a href="{% url 'login' %}">Вход</a> |
+    <a href="{% url 'home' %}">На главную</a>
+  </span>
+{% endblock %}
+
+{% block pagination %}{% endblock %}

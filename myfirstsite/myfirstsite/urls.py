@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from news.views import index, register, login
+from news.views import index, register, my_login, my_logout
 
 
 urlpatterns = [
@@ -26,7 +26,8 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('', index, name='home'),
     path('register/', register, name='register'),
-    path('login/', login, name='login')
+    path('login/', my_login, name='login'),
+    path('logout/', my_logout, name='logout')
 ]
 
 if settings.DEBUG:
