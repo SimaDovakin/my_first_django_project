@@ -11,7 +11,11 @@ from .forms import NewsForm, RegisterForm, LoginForm
 
 
 def index(request):
-    context = {'title': 'Главная'}
+    news_on_main = News.objects.filter(on_main=True)
+    context = {
+        'title': 'Главная',
+        'news_on_main': news_on_main
+    }
     return render(request, 'news/index.html', context=context)
 
 

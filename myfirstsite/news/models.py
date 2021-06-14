@@ -11,6 +11,7 @@ class News(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
     views = models.IntegerField(default=0, verbose_name="Просмотры")
+    on_main = models.BooleanField(verbose_name="На главную", default=False)
 
     def __str__(self):
         return self.title

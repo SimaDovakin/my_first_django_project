@@ -5,6 +5,25 @@
 {% endblock %}
 
 {% block content %}
-  {{ block.super }}
+
+  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+  {% comment %}
+    <div class="row">
+      <div class="col-12 col-md-8 border"><img src="{{ item }}" alt=""></div>
+      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
+      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
+      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
+    </div>
+
+    <!-- Columns are always 50% wide, on mobile and desktop -->
+    <div class="row">
+      <div class="col-6 border"><img src="" alt=""></div>
+      <div class="col-6 border"><img src="" alt=""></div>
+    </div>
+  {% endcomment %}
 {% endblock %}
 {% block pagination %}{% endblock %}
