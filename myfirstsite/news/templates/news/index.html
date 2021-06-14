@@ -1,29 +1,37 @@
 {% extends 'base.html' %}
 
 {% block sidebar %}
-  {{ block.super }}
+  {% include 'include/_sidebar.html' %}
 {% endblock %}
 
 {% block content %}
-
-  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-  {% comment %}
-    <div class="row">
-      <div class="col-12 col-md-8 border"><img src="{{ item }}" alt=""></div>
-      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
-    </div>
-
-    <div class="row">
-      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
-      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
-      <div class="col-6 col-md-4 border"><img src="" alt=""></div>
-    </div>
-
-    <!-- Columns are always 50% wide, on mobile and desktop -->
-    <div class="row">
-      <div class="col-6 border"><img src="" alt=""></div>
-      <div class="col-6 border"><img src="" alt=""></div>
-    </div>
-  {% endcomment %}
+   {% for item in news_on_main %}
+      <div class="card mb-3">
+        <div class="card-header">
+          Категория:
+          {% if category_id %}
+            <span>{{ item.category }}</span>
+          {% else %}
+            <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <div class="media">
+            {% if item.photo %}
+              <img src="{{ item.photo.url }}" alt="img" width="350" class="mr-3">
+            {% endif %}
+            <div class="media-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p class="card-text">{{ item.content|safe|linebreaksbr|truncatewords:50 }}</p>
+              <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Подробнее...</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <span>{{ item.created_at|date:"d.m.Y H:i" }}</span>
+          <span style="float: right;">Количество просмотров: {{ item.views }}</span>
+        </div>
+      </div>
+  {% endfor %}
 {% endblock %}
 {% block pagination %}{% endblock %}
