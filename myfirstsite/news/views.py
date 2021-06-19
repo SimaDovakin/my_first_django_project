@@ -11,7 +11,11 @@ from .forms import NewsForm, RegisterForm, LoginForm
 
 
 def index(request):
-    news_on_main = News.objects.filter(on_main=True)
+    news_on_main = News.objects.filter(
+        on_main=True,
+        is_published=True
+    ).select_related('category')
+    
     context = {
         'title': 'Главная',
         'news_on_main': news_on_main
